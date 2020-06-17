@@ -1,0 +1,44 @@
+#config_version=5
+
+mode:
+  start_events: ball_starting
+  # default priority is 100
+  code: base.Base
+
+config:
+  - scoring.yaml
+  - sequence_shots.yaml
+  - shots.yaml
+  - slides.yaml
+  - widgets.yaml
+
+widget_player:
+  timer_base_flash_tick{device.timers.base_flash.ticks % 2 == 0}:
+    flash_mask:
+      action: add
+  timer_base_flash_tick{device.timers.base_flash.ticks % 2 != 0}:
+    flash_mask:
+      action: remove
+  timer_base_flash_complete:
+    flash_mask:
+      action: remove
+
+timers:
+  # only code will fire this so no need for control events
+  base_transition:
+    end_value: 16
+    tick_interval: 50ms
+  base_flash:
+    end_value: 30
+    tick_interval: 50ms
+    control_events:
+      - action: start
+        event: base_flash_start
+      - action: restart
+        event: base_flash_start
+      - action: reset
+        event: timer_base_flash_complete
+
+slide_player:
+  mode_base_started: base
+

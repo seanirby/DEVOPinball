@@ -1,0 +1,78 @@
+#config_version=5
+
+mode:
+  code: drops.Drops
+  start_events: ball_starting
+
+config:
+  - shows.yaml
+  - slides.yaml
+  - widgets.yaml
+
+show_player:
+  drops_state_award_1_collected:
+    drops_show_mystery_lit:
+      loops: 0
+  drops_state_award_2_collected:
+    drops_show_ball_locked:
+      loops: 0
+  drops_state_award_3_collected:
+    drops_show_urge_lit:
+      loops: 0
+
+# TODO: add lights that start off reflecting state of drops
+# TODO: when drops complete, a brief show is played announcing award, award is given, and state is advanced
+state_machines:
+  drops:
+    states:
+      start:
+        label: placeholder
+      award_1:
+        label: awards light mystery
+        events_when_started: drops_state_award_1_started
+        show_when_active:
+          show: drops_show_award_1
+          show_tokens: 
+            a: l_serial_chain_0_41
+            b: l_serial_chain_0_42
+            c: l_serial_chain_0_43
+      award_2:
+        label: awards ball award (adda ball or ball lock)
+        events_when_started: drops_state_award_2_started
+        show_when_active:
+          show: drops_show_award_2
+          show_tokens: 
+            a: l_serial_chain_0_41
+            b: l_serial_chain_0_42
+            c: l_serial_chain_0_43
+      award_3:
+        label: lights loop jackpot mode
+        events_when_started: drops_state_award_3_started
+        show_when_active:
+          show: drops_show_award_3
+          show_tokens: 
+            a: l_serial_chain_0_41
+            b: l_serial_chain_0_42
+            c: l_serial_chain_0_43
+    transitions:
+      - source: start
+        target: award_1
+        events: drops_state_initialize
+      - source: award_1
+        target: award_2
+        events: drop_target_bank_drops_down
+        events_when_transitioning: drops_state_award_1_collected, drops_state_reset_bank
+      - source: award_2
+        target: award_3
+        events: drop_target_bank_drops_down
+        events_when_transitioning: drops_state_award_2_collected, drops_state_reset_bank
+      - source: award_3
+        target: award_1
+        events: drop_target_bank_drops_down
+        events_when_transitioning: drops_state_award_3_collected, drops_state_reset_bank
+      
+event_player:
+  mode_drops_started{current_player.ball==1}: drops_state_initialize
+  mode_drops_started: drops_state_reset_bank
+  
+

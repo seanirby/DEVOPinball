@@ -1,0 +1,139 @@
+#config_version=5
+
+hardware:
+  platform: p3_roc
+  driverboards: pdb
+
+p_roc:
+  pd_led_boards:
+    5:
+      use_ws281x_0: True
+
+config:
+- autofire_coils.yaml
+- ball_devices.yaml 
+- coils.yaml
+- diverters.yaml
+- drop_targets.yaml
+- flippers.yaml
+- keyboard.yaml
+- lights.yaml
+- machine_vars.yaml
+- modes.yaml
+- player_vars.yaml
+- playfields.yaml
+- switches.yaml
+
+sound_system:
+  master_volume: 1.5
+  tracks:
+     music:
+       type: sound_loop
+       simultaneous_sounds: 1
+       volume: 0.5
+     voice:
+       type: standard
+       simultaneous_sounds: 1
+       volume: 0.7
+     sfx:
+       type: standard
+       simultaneous_sounds: 8
+       volume: 1
+       preload: yes
+
+assets:
+  sounds:
+    default:
+      load: on_demand
+    music:
+      track: music
+      # preload for testing purposes only
+      load: preload
+    sfx:
+      track: sfx
+      load: preload
+    voice:
+      track: voice
+
+# Define non-default settings for sounds here
+# sounds that should be instantaneous need to be set here with max queue time
+sounds:
+  charge:
+    max_queue_time: 0
+  charge_release:
+    max_queue_time: 0
+  other_short_1: 
+    max_queue_time: 0
+  # sling sounds
+  other_short_3: 
+    max_queue_time: 0
+  other_short_4: 
+    max_queue_time: 0
+  other_short_5: 
+    max_queue_time: 0
+  other_short_6: 
+    max_queue_time: 0
+  # pop sounds
+  other_short_10: 
+    max_queue_time: 0
+  other_short_11: 
+    max_queue_time: 0
+  other_short_12: 
+    max_queue_time: 0
+  other_short_13: 
+    max_queue_time: 0
+  # ramp sounds
+  pos_med_3:
+    max_queue_time: 0
+  pos_med_5:
+    max_queue_time: 0
+
+sound_pools:
+  sling:
+    load: preload
+    type: sequence
+    track: sfx
+    sounds:
+      - other_short_3
+      - other_short_4
+      - other_short_5
+      - other_short_6
+  pop:
+    load: preload
+    type: random
+    track: sfx
+    sounds:
+      - other_short_10
+      - other_short_11
+      - other_short_12
+      - other_short_13
+    
+  # mode_attract_started.2:
+  #   effect_slide:
+  #     target: my_frame
+
+window:
+    width: 800
+    height: 600
+    title: DEVO Pinball
+    source_display: window
+    effects:
+      - type: glow
+        blur_size: 5.0
+        intensity: .6
+        glow_speed: 1.0
+        glow_amplitude: .2
+      # - type: horizontal_blur
+      #   size: 2
+      # - type: vertical_blur
+      #   size: 2
+      # blur_size
+      # intensity 
+      # throb_speed = default is 0
+      # throb_amplitude = default 
+        
+
+displays:
+  window:
+     width: 800
+     height: 600

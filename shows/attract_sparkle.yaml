@@ -1,0 +1,26 @@
+#show_version=5
+
+- time: 0
+  variables:
+    d_attract_1:
+      action: set_machine
+      string: '!!!!!!!!!!!!!!!!'
+    d_attract_2:
+      action: set_machine
+      string: '!!!!!!!!!!!!!!!!'
+- time: 1
+  variables:
+    d_attract_1:
+      action: set_machine
+      string: 'PRESS!!!!!!!!!!!'
+    d_attract_2:
+      action: set_machine
+      string: '!!!!!!!!!!!!!!!!'
+- time: 2
+  variables:
+    d_attract_1:
+      action: set_machine
+      string: 'PRESS!!!!!!START'
+    d_attract_2:
+      action: set_machine
+      string: '!!!!!!!!!!!!!!!!'

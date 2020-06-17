@@ -1,0 +1,20 @@
+#config_version=5
+
+mode:
+  start_events: dev_start_third
+  stop_events: dev_award_letter
+
+config:
+  - shots.yaml
+
+event_player:
+  mode_third_started.2: third_enable_orbit_left
+  mode_third_started.4: third_enable_orbit_right
+
+accruals:
+  third:
+    # relying on convenience events from MPF, I do not trigger these
+    events:
+      - sh_third_orbit_left_one_lit_hit
+      - sh_third_orbit_right_one_lit_hit
+    events_when_complete: dev_award_letter
