@@ -1,6 +1,6 @@
 * DEVO Pinball
   This is the [[https://missionpinball.org/][Mission Pinball Framework]] code for my DEVO themed
-  pinball machine.  Check out [[https:spacejunk.cc][my blog]] if you're interested in learning
+  pinball machine.  Check out [[https://spacejunk.cc][my blog]] if you're interested in learning
   more about this project.
 
   NOTE: I've omitted the music and sound assets from this repo so
